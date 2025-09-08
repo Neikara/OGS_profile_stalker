@@ -10,7 +10,11 @@ JOUEURS_A_SURVEILLER = {
     "1484188": "Randommover",
     "1854131": "Inseong",
     "1088109": "Moad",
-    "1812060": "Keil"
+    "1812060": "Keil",
+    "991056": "Keil1",
+    "1734477": "Pierre-Loic",
+    "56011": "Olivier",
+    "1123891": "Lilanlu"
 }
 
 FICHIER_COMPTEUR = "game_counts.json"
@@ -83,3 +87,4 @@ def run_check():
 
 if __name__ == "__main__":
     run_check()
+
