@@ -1,0 +1,35 @@
+name: Surveillance OGS
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Exécuté toutes les 5 minutes
+
+permissions:
+  contents: write # Important : donne les permissions d'écriture
+
+jobs:
+  run_watcher:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Configuration de Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Installation des dépendances
+        run: pip install requests
+
+      - name: Exécution du script ade surveillance
+        run: python check_ogs.py
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+
+      - name: Commit des modifications
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add game_count.txt
+          git commit -m "Mise à jour du nombre de parties OGS" || echo "Pas de modification à commiter"
