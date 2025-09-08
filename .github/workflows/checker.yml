@@ -3,7 +3,7 @@ name: Surveillance OGS
 on:
   schedule:
     - cron: '*/5 * * * *' # Exécuté toutes les 5 minutes
-
+  workflow_dispatch:
 permissions:
   contents: write # Important : donne les permissions d'écriture
 
