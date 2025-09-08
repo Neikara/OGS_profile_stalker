@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '*/5 * * * *' # Exécuté toutes les 5 minutes
   workflow_dispatch:
+
 permissions:
   contents: write # Important : donne les permissions d'écriture
 
@@ -22,7 +23,7 @@ jobs:
       - name: Installation des dépendances
         run: pip install requests
 
-      - name: Exécution du script ade surveillance
+      - name: Exécution du script de surveillance
         run: python check_ogs.py
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
@@ -32,4 +33,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add game_counts.json
-          git commit -m "Mise à jour du nombre de parties OGS" || echo "Pas de modification à commiter"
+          git commit -m "Mise à jour des comptes de parties OGS" || echo "Pas de modification à commiter"
+
+      - name: Push des modifications
+        run: |
+          git push
